@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Login Screen</title>
+</head>
+<body>
+  <section class="bg-stone-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-gray-200 flex rounded-xl shadow-lg max-w-3xl p-5 items-center">
+        <div class="md:w-1/2 px-10">
+          <h2 class="text-4xl text-amber-400 font-bold text-2x1">Iniciar sesión</h2>
+          <form action="" class="mt-5 flex flex-col gap-4">
+            <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
+            " type="text" name="email" placeholder="Correo electrónico">
+            <div class="relative">
+              <input id="password" class="p-2  rounded-xl bg-gray-100 border w-full border-amber-200" type="password" name="password" placeholder="Contraseña">
+              <button class="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer" onclick="event.preventDefault(); document.querySelector('#password').type = document.querySelector('#password').type === 'password' ? 'text' : 'password';">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-eye" viewBox="0 0 16 16">
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                </svg>
+              </button>
+            </div>
+            <button class="mt-5 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300">Iniciar sesión</button>
+          </form>
+
+          <div class="mt-10 text-gray-500 ">
+        
+            <a class="text-blue-600 cursor-pointer hover:underline text-xs">¿Olvidaste tu contraseña?</a>
+          
+          </div>
+
+           <div class="mt-5 text-xs flex justify-between items-center mt-5 items-center">
+            <a href="registro.html" class="text-blue-600 cursor-pointer hover:underline">¿Aún no tienes una cuenta?</a>
+           </div>
+
+        </div>
+
+        <div class="w-1/2 p-5">
+           <img class="md:block hidden rounded-2xl" src="/src/resources/login.png" alt=""> 
+        </div>
+    </div>
+  </section>
+</body>
+</html>
