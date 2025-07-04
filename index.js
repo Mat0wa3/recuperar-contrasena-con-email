@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`servidor iniciado en: http://localhost:${PORT}`)
+    console.log(`bgfgfgtf iniciado en: http://localhost:${PORT}`)
 })
