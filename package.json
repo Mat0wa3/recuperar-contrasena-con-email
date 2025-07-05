@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Esto es un proyecto el cual gestiona el inventario de una tienda de productos alimenticios",
   "type": "module",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node --watch index.js"
+    "dev": "node --watch app.js"
   },
   "keywords": [],
   "author": "Hecho con 💖 y javascript",
