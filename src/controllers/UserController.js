@@ -57,4 +57,15 @@ export default class UserController {
             res.status(500).send({ message: "Internal server error" })
         }
     }
+
+    async emailCode(req, res) {
+        const { email } = req.body
+        try {
+            const code = await userModel.emailCode(email)
+            return res.status(200).send({ message: "Código de verificación enviado", code })
+        } catch (error) {
+            console.error("Error al enviar código de verificación:", error.message)
+            res.status(500).send({ message: "Internal server error" })
+        }
+    }
 }
