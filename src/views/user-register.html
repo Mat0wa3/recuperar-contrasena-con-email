@@ -81,8 +81,8 @@
                 errorSubmit.classList.remove("invisible");
                 return
             }
-            if (inputPassword.value.length < 6) {
-                errorSubmit.textContent = "La contraseña debe tener al menos 6 caracteres";
+            if (inputPassword.value.length < 8) {
+                errorSubmit.textContent = "La contraseña debe tener al menos 8 caracteres";
                 errorSubmit.classList.remove("invisible");
                 return
             }
@@ -105,7 +105,7 @@
         })
 
         async function registerUser() {
-            const respuesta = await fetch("http://localhost:3000/api/users", {
+            const respuesta = await fetch("http://localhost:3000/api/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -114,7 +114,8 @@
                     name: inputNombre.value,
                     last_name: inputApellido.value,
                     email: inputEmail.value,
-                    password: inputPassword.value
+                    password: inputPassword.value,
+                    confirmPassword: inputConfirmPassword.value  
                 })
             });
             const data = await respuesta.json();
