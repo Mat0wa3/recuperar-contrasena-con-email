@@ -1,17 +1,16 @@
 import mysql from "mysql2/promise"
 import 'dotenv/config'
 
-const { host, user, database } = process.env
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env
 
-const connection = await mysql.createConnection({
-    host: host,
-    user: user,
-    database: database
+const db = await mysql.createPool({
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 })
 
-try {
-    const [query] = await connection.query("SELECT BIN_TO_UUID(userID) userID, username, email, password FROM users;")
-    console.log(query)
-} catch (error) {
-    console.error( error.message )
-}
+export default db
