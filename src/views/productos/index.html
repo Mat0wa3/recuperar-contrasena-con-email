@@ -126,7 +126,7 @@
 
     </section>
 
-    <div id="createProductsModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="createProductsModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
             <button onclick="closeModal('createProductsModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
@@ -155,7 +155,7 @@
     </div>
 
 
-    <div id="editProductsModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="editProductsModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
             <button onclick="closeModal('editProductsModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
@@ -217,6 +217,7 @@
         document.querySelectorAll('.dropdown-menu').forEach(el => el.classList.add('hidden'));
         if (isHidden) {
             menu.classList.remove('hidden');
+            menu.classList.add('flex')
         } else {
             menu.classList.add('hidden');
         }
@@ -231,6 +232,7 @@
 
     function openModal(element) {
         document.getElementById(element).classList.remove("hidden");
+        document.getElementById(element).classList.add('flex')
     }
 
     function closeModal(element) {

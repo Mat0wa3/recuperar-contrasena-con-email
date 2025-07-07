@@ -32,7 +32,6 @@ export default class RegisterController {
             if (!user) {
                 return res.status(404).send({ message: "Usuario no encontrado" })
             }
-            console.log(user)
             if (user.verificationCode !== code) {
                 return res.status(400).send({ message: "Código de verificación incorrecto" })
             }
@@ -63,6 +62,52 @@ export default class RegisterController {
             res.status(200).send({ message: "Inicio de sesión exitoso", user })
         } catch (error) {
             console.error("Error al iniciar sesión:", error.message)
+            res.status(500).send({ message: "Internal server error" })
+        }
+    }
+
+    async forgotPassword(req, res) {
+        const { email } = req.body
+
+        if (!email) {
+            return res.status(400).send({ message: "Email es obligatorio" })
+        }
+
+        try {
+            const user = await userModel.getByEmail(email)
+            if (!user) {
+                return res.status(404).send({ message: "Usuario no encontrado" })
+            }
+
+            const code = generateVerificationCode()
+            await sendVerificationEmail(email, code)
+
+            res.status(200).send({ message: "Código de verificación enviado al correo electrónico" })
+        } catch (error) {
+            console.error("Error al enviar el código de verificación:", error.message)
+            res.status(500).send({ message: "Internal server error" })
+        }
+    }
+
+    async resetPassword(req, res) {
+        const { email, newPassword } = req.body
+
+        if (!email || !newPassword) {
+            return res.status(400).send({ message: "Email y nueva contraseña son obligatorios" })
+        }
+
+        try {
+            const user = await userModel.getByEmail(email)
+            if (!user) {
+                return res.status(404).send({ message: "Usuario no encontrado" })
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10)
+            await userModel.updatePassword(user.userID, hashedPassword)
+
+            res.status(200).send({ message: "Contraseña actualizada correctamente" })
+        } catch (error) {
+            console.error("Error al actualizar la contraseña:", error.message)
             res.status(500).send({ message: "Internal server error" })
         }
     }

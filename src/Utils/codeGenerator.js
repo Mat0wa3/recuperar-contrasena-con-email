@@ -21,6 +21,4 @@ export async function sendVerificationEmail(email, code) {
         console.error("Error al enviar el correo de verificación:", error)
         throw new Error("Error al enviar el correo de verificación")
     }
-
-    console.log("Correo de verificación enviado:", data)
 }   

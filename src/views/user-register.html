@@ -133,7 +133,7 @@
                 errorSubmit.classList.add("text-green-500");
                 localStorage.setItem("userEmail", inputEmail.value);
                 setTimeout(() => {
-                    window.location.href = "/verifyEmail";
+                    window.location.href = "/verify-email";
                 }, 2000);
             } else {
                 errorSubmit.textContent = data.error || "Error al registrar el usuario";

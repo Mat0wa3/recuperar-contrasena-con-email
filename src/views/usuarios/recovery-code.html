@@ -12,7 +12,8 @@
         <div class="bg-gray-200 flex rounded-xl shadow-lg max-w-3xl p-5 items-center">
             <div class="px-10">
             <h2 class="text-4xl text-amber-400 font-bold text-2x1">Recuperar contraseña</h2>
-            <form action="" class="mt-5 flex flex-col gap-4">
+            <form method="post" class="mt-5 flex flex-col gap-4">
+                <p class=" text-gray-500">Revisa el codigo de verificacion que hemos enviado al correo: <strong id="correo"></strong></p>
                 <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
                 " type="number" name="number" placeholder="Codigo">
                 
@@ -23,5 +24,19 @@
                 </div>
             </form>
     </section>
+
+    <script>
+        const $ = (el) => document.querySelector(el)
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem("userEmail")
+            if (userEmail) {
+                $('#correo').textContent = userEmail
+            } else {
+                $('#correo').textContent = "No se ha proporcionado un correo electrónico."
+            }
+        })
+
+    </script>
 </body>
 </html>
