@@ -4,6 +4,7 @@ import path from 'path'
 import userRoutes from './src/routes/userRoutes.js'
 import productRoutes from './src/routes/productRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
+import webRoutes from './src/routes/webRoutes.js'
 
 const PORT = process.env.PORT
 const app = express()
@@ -15,14 +16,7 @@ app.use(express.static(path.join(__dirname, "src")))
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/auth', authRoutes)
-
-app.get('/', (req, res) => {
-    res.sendFile('/src/views/login.html', { root: '.' })
-})
-
-app.get('/register', (req, res) => {
-    res.sendFile('/src/views/user-register.html', { root: '.' })
-})
+app.use('/', webRoutes)
 
 app.listen(PORT, () => {
     console.log(`servidor iniciado en: http://localhost:${PORT}`)
