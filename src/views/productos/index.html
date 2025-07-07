@@ -60,12 +60,14 @@
                 <h2 class="text-3xl text-amber-400 font-bold mb-6">Productos</h2>
 
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-6">
+                    <div class="col-span-10">
                         <input class="p-2  rounded-xl bg-gray-100 border w-250" name="Buscar" placeholder="Buscar">
                     </div>
 
-                    <div class="col-span-6 flex-row">
-                        <button onclick="openModal('createProductsModal')" class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+ Nuevo producto</button>
+                    <div class="col-span-2 flex-row">
+                        <button onclick="openModal('createProductsModal')"
+                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+
+                            Nuevo producto</button>
                     </div>
                 </div>
 
@@ -92,21 +94,27 @@
                             <td class="text-center">Pastas</td>
                             <td class="text-center">Espaguettis doria</td>
                             <td class="text-center">$3.500</td>
-                            <td class="text-center"><span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                            <td class="text-center"><span
+                                    class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
                             </td>
                             <!-- <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span> -->
                             <td class="text-center relative overflow-visible">
                                 <div class="relative inline-block text-left">
-                                    <button onclick="toggleDropdown(this)" class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"type="button">
+                                    <button onclick="toggleDropdown(this)"
+                                        class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
+                                        type="button">
                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            <path
+                                                d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                         </svg>
                                     </button>
-                                    <div 
+                                    <div
                                         class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
-                                        <a href="#" onclick="openModal('editProductsModal')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
+                                        <a href="#" onclick="openModal('editProductsModal')"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
                                     </div>
                                 </div>
                             </td>
@@ -162,7 +170,7 @@
                 " type="text" name="Nombre" placeholder="Nombre">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
                 " type="text" name="Descripción" placeholder="Descripción">
-                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
+                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
                 " type="number" name="ValorUnitario" placeholder="Valor Unitario">
             </form>
             <br>
@@ -184,14 +192,14 @@
 <script>
 
     function showAlert(type) {
-        
-        if (type === "crear"){
+
+        if (type === "crear") {
             Swal.fire({
-            title: 'Genial!',
-            text: 'El usuario ha sido creado exitosamente.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-        })
+                title: 'Genial!',
+                text: 'El usuario ha sido creado exitosamente.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
         }
         else {
             Swal.fire({

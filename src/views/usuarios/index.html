@@ -61,13 +61,15 @@
 
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-10">
-                        <input id="password" class="p-2  rounded-xl bg-gray-100 border w-full" type="password"
-                            name="password" placeholder="Buscar">
+                        <input id="Buscar" class="p-2  rounded-xl bg-gray-100 border w-250" type="text"
+                            placeholder="Buscar">
                     </div>
 
                     <div class="col-span-2 flex-row">
+                    <div class="col-span-2 flex-row">
                         <button onclick="openModal('createUserModal')"
-                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110" >+ Nuevo
+                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+
+                            Nuevo
                             usuario</button>
                     </div>
                 </div>
@@ -202,14 +204,14 @@
     }
 
     function showAlert(type) {
-        
-        if (type === "crear"){
+
+        if (type === "crear") {
             Swal.fire({
-            title: 'Genial!',
-            text: 'El usuario ha sido creado exitosamente.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-        })
+                title: 'Genial!',
+                text: 'El usuario ha sido creado exitosamente.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
         }
         else {
             Swal.fire({
