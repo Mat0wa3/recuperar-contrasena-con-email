@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>confirm-code</title>
+</head>
+<body>
+    <section class="bg-stone-100 min-h-screen flex  items-center justify-center">
+
+        <div class="bg-gray-200 flex rounded-xl shadow-lg max-w-3xl p-5 items-center">
+            <div class="px-10">
+            <h2 class="text-4xl text-amber-400 font-bold text-2x1">Recuperar contraseña</h2>
+            <form action="" class="mt-5 flex flex-col gap-4">
+                <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
+                " type="number" name="number" placeholder="Codigo">
+                
+                
+                <div class="flex justify-center gap-6 mt-5">
+                    <a href="login.html" class="mt-3 bg-orange-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Cancelar</a>
+                    <a href="" id="btnContinuar" type="button" class="mt-3 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Continuar</a>
+                </div>
+            </form>
+    </section>
+
+    <script>
+           document.getElementById('btnContinuar').addEventListener('click', function () {
+           const mensaje = document.getElementById('mensaje');
+           mensaje.classList.remove('hidden');
+
+         setTimeout(() => {
+          window.location.href = "/login";
+         }, 3000); 
+        });
+    </script>
+</body>
+</html>
