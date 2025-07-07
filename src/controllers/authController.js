@@ -1,5 +1,6 @@
 import { generateVerificationCode, sendVerificationEmail } from "../Utils/codeGenerator.js"
 import UserModel from "../models/UserModel.js"
+import bcrypt from "bcrypt"
 
 const userModel = new UserModel()
 
@@ -39,6 +40,29 @@ export default class RegisterController {
             res.status(200).send({ message: "Cuenta verificada correctamente" })
         } catch (error) {
             console.error("Error al verificar usuario:", error.message)
+            res.status(500).send({ message: "Internal server error" })
+        }
+    }
+
+    async login(req, res) {
+        const { email, password } = req.body
+
+        if (!email || !password) {
+            return res.status(400).send({ message: "Email y contraseña son obligatorios" })
+        }
+
+        try {
+            const user = await userModel.getByEmail(email)
+            if (!user) {
+                return res.status(404).send({ message: "Usuario no encontrado" })
+            }
+
+            const comparedPassword = await bcrypt.compare(password, user.password)
+            if (!comparedPassword) return res.status(401).send({ message: "Contraseña incorrecta" })
+
+            res.status(200).send({ message: "Inicio de sesión exitoso", user })
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error.message)
             res.status(500).send({ message: "Internal server error" })
         }
     }

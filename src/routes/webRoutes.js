@@ -16,7 +16,10 @@ router.get('/forgot-password', (req, res) => {
     res.sendFile('/usuarios/forgot-password.html', viewsPath)
 })
 router.get('/usuarios/panel', (req, res) => {
-    res.sendFile('/usuarios/panel.html', viewsPath)
+    res.sendFile('/usuarios/index.html', viewsPath)
+})
+router.get('/productos/panel', (req, res) => {
+    res.sendFile('/productos/index.html', viewsPath)
 })
 
 export default router

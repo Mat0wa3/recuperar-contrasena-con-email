@@ -17,17 +17,7 @@
             <div class="flex flex-col gap-6 items-center">
                 <h2 class="text-3xl text-amber-400 font-bold">Menú</h2>
 
-                <button class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                    </svg>
-                </button>
-
-                <button class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+                <a href="#top" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -36,9 +26,9 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                         <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                     </svg>
-                </button>
+                </a>
 
-                <button class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+                <a href="/productos/panel" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -47,18 +37,18 @@
                         <path d="M7 12c0 -1.47 .454 -2.34 1.5 -3" />
                         <path d="M12 7c0 -1.2 .867 -4 3 -4" />
                     </svg>
-                </button>
+                </a>
             </div>
 
             <div class="mb-4">
-                <button class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+                <a href="/" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M7 6a7.75 7.75 0 1 0 10 0" />
                         <path d="M12 4l0 8" />
                     </svg>
-                </button>
+                </a>
             </div>
         </div>
 
@@ -70,12 +60,12 @@
                 <h2 class="text-3xl text-amber-400 font-bold mb-6">Usuarios</h2>
 
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-6">
-                        <input id="password" class="p-2  rounded-xl bg-gray-100 border w-250" type="password"
+                    <div class="col-span-10">
+                        <input id="password" class="p-2  rounded-xl bg-gray-100 border w-full" type="password"
                             name="password" placeholder="Buscar">
                     </div>
 
-                    <div class="col-span-6 flex-row">
+                    <div class="col-span-2 flex-row">
                         <button onclick="openModal('createUserModal')"
                             class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110" >+ Nuevo
                             usuario</button>
@@ -90,7 +80,6 @@
                             <th class="px-4 py-2 font-semibold">Nombre</th>
                             <th class="px-4 py-2 font-semibold">Apellido</th>
                             <th class="px-4 py-2 font-semibold">Correo Electrónico</th>
-                            <th class="px-4 py-2 font-semibold">Rol</th>
                             <th class="px-4 py-2 font-semibold">Estado</th>
                             <th class="px-4 py-2 font-semibold">
 
@@ -98,46 +87,14 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">Karen</td>
-                            <td class="text-center">Gonzalez</td>
-                            <td class="text-center">karengmg27@gamil.com</td>
-                            <td class="text-center">Admin</td>
-                            <td class="text-center"><span
-                                    class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
-                            </td>
-                            <!-- <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span> -->
-                            <td class="text-center relative overflow-visible">
-                                <div class="relative inline-block text-left">
-                                    <button onclick="toggleDropdown(this)"
-                                        class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
-                                        type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        </svg>
-                                    </button>
-                                    <div
-                                        class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
-                                        <a href="#" onclick="openModal('editUserModal')"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="userTableBody"></tbody>
                 </table>
             </div>
         </div>
 
     </section>
 
-    <div id="createUserModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="createUserModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
             <button onclick="closeModal('createUserModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
@@ -164,7 +121,7 @@
     </div>
 
 
-    <div id="editUserModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="editUserModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
             <button onclick="closeModal('editUserModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
@@ -197,6 +154,52 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    const $ = (el) => document.querySelector(el)
+    async function cargarUsuarios() {
+        const userTableBody = $('#userTableBody')
+        const data = await fetch('/api/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const users = await data.json()
+        console.log(users)
+        const tr = document.createElement('tr')
+        users.forEach(user => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td class="text-center">${user.userID}</td>
+                <td class="text-center">${user.name}</td>
+                <td class="text-center">${user.last_name}</td>
+                <td class="text-center">${user.email}</td>
+                <td class="text-center">
+                    <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                </td>
+                <td class="text-center relative overflow-visible">
+                    <div class="relative inline-block text-left">
+                        <button onclick="toggleDropdown(this)"
+                            class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
+                            type="button">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
+                            <a href="#" onclick="openModal('editUserModal')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
+                        </div>
+                    </div>
+                </td>`
+            userTableBody.appendChild(tr)
+        })
+    }
 
     function showAlert(type) {
         
@@ -243,6 +246,8 @@
     function closeModal(element) {
         document.getElementById(element).classList.add("hidden");
     }
+
+    cargarUsuarios()
 </script>
 
 </html>

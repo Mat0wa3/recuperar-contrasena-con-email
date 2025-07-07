@@ -14,8 +14,8 @@
       <div class="md:w-1/2 px-10">
         <h2 class="text-4xl text-amber-400 font-bold text-2x1">Iniciar sesión</h2>
         <form action="" class="mt-5 flex flex-col gap-4">
-          <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-            " type="text" name="email" placeholder="Correo electrónico">
+          <input id="email" class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
+            " type="email" name="email" placeholder="Correo electrónico">
           <div class="relative">
             <input id="password" class="p-2  rounded-xl bg-gray-100 border w-full border-amber-200" type="password"
               name="password" placeholder="Contraseña">
@@ -30,12 +30,13 @@
             </button>
           </div>
           <button
-            class="mt-5 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300">Iniciar
+            id="enviar" class="cursor-pointer mt-5 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300">Iniciar
             sesión</button>
         </form>
 
         <div class="mt-10 text-gray-500 ">
-          <a href="/forgot-password" class="text-blue-600 cursor-pointer hover:underline text-xs">¿Olvidaste tu contraseña?</a>
+          <a href="/forgot-password" class="text-blue-600 cursor-pointer hover:underline text-xs">¿Olvidaste tu
+            contraseña?</a>
         </div>
 
         <div class="mt-5 text-xs flex justify-between items-center">
@@ -48,6 +49,56 @@
       </div>
     </div>
   </section>
+
+  <script>
+    const $ = (el) => document.querySelector(el)
+
+    const inputEmail = $("#email")
+    const inputPassword = $("#password")
+    const submitButton = $("#enviar")
+    const errorSubmit = document.createElement("p")
+
+    errorSubmit.id = "errorSubmit"
+    errorSubmit.className = "text-red-500 mt-2"
+    submitButton.insertAdjacentElement("afterend", errorSubmit)
+
+    submitButton.addEventListener("click", async (e) => {
+      e.preventDefault()
+
+      if (inputEmail.value === "") {
+        errorSubmit.textContent = "El correo electrónico es obligatorio"
+        errorSubmit.classList.remove("invisible")
+        return
+      }
+
+      if (inputPassword.value === "") {
+        errorSubmit.textContent = "La contraseña es obligatoria"
+        errorSubmit.classList.remove("invisible")
+        return
+      }
+
+      const data = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: inputEmail.value,
+          password: inputPassword.value
+        })
+      })
+      
+      errorSubmit.textContent = ""
+
+      const response = await data.json()
+      if (data.status === 200) {
+        window.location.href = "/usuarios/panel"
+      } else {
+        errorSubmit.textContent = response.message || "Error al iniciar sesión"
+        errorSubmit.classList.remove("invisible")
+      }
+    })
+  </script>
 </body>
 
 </html>
