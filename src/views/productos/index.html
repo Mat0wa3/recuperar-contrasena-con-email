@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Productos</title>
 
 </head>
 
@@ -67,18 +67,15 @@
         <div class="bg-stone-100 flex-1">
 
             <div class="px-10 py-6">
-                <h2 class="text-3xl text-amber-400 font-bold mb-6">Usuarios</h2>
+                <h2 class="text-3xl text-amber-400 font-bold mb-6">Productos</h2>
 
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-6">
-                        <input id="password" class="p-2  rounded-xl bg-gray-100 border w-250" type="password"
-                            name="password" placeholder="Buscar">
+                        <input class="p-2  rounded-xl bg-gray-100 border w-250" name="Buscar" placeholder="Buscar">
                     </div>
 
                     <div class="col-span-6 flex-row">
-                        <button onclick="openModal('createUserModal')"
-                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110" >+ Nuevo
-                            usuario</button>
+                        <button onclick="openModal('createProductsModal')" class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+ Nuevo producto</button>
                     </div>
                 </div>
 
@@ -87,10 +84,10 @@
                     <thead>
                         <tr class="bg-amber-100 ">
                             <th class="px-4 py-2 font-semibold">Id</th>
+                            <th class="px-4 py-2 font-semibold">Referencia</th>
                             <th class="px-4 py-2 font-semibold">Nombre</th>
-                            <th class="px-4 py-2 font-semibold">Apellido</th>
-                            <th class="px-4 py-2 font-semibold">Correo Electrónico</th>
-                            <th class="px-4 py-2 font-semibold">Rol</th>
+                            <th class="px-4 py-2 font-semibold">Descripción</th>
+                            <th class="px-4 py-2 font-semibold">Valor unitario</th>
                             <th class="px-4 py-2 font-semibold">Estado</th>
                             <th class="px-4 py-2 font-semibold">
 
@@ -101,31 +98,25 @@
                     <tbody>
                         <tr>
                             <td class="text-center">1</td>
-                            <td class="text-center">Karen</td>
-                            <td class="text-center">Gonzalez</td>
-                            <td class="text-center">karengmg27@gamil.com</td>
-                            <td class="text-center">Admin</td>
-                            <td class="text-center"><span
-                                    class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                            <td class="text-center">P01</td>
+                            <td class="text-center">Pastas</td>
+                            <td class="text-center">Espaguettis doria</td>
+                            <td class="text-center">$3.500</td>
+                            <td class="text-center"><span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
                             </td>
                             <!-- <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span> -->
                             <td class="text-center relative overflow-visible">
                                 <div class="relative inline-block text-left">
-                                    <button onclick="toggleDropdown(this)"
-                                        class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
-                                        type="button">
+                                    <button onclick="toggleDropdown(this)" class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"type="button">
                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                         </svg>
                                     </button>
-                                    <div
+                                    <div 
                                         class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
-                                        <a href="#" onclick="openModal('editUserModal')"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
+                                        <a href="#" onclick="openModal('editProductsModal')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
                                     </div>
                                 </div>
                             </td>
@@ -137,25 +128,27 @@
 
     </section>
 
-    <div id="createUserModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="createProductsModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
-            <button onclick="closeModal('createUserModal')"
+            <button onclick="closeModal('createProductsModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
                 ×
             </button>
 
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Nuevo usuario</h2>
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Nuevo producto</h2>
             <form action="" class="mt-5 flex flex-col gap-4">
                 <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="nombre" placeholder="Nombre">
+                " type="text" name="Referencia" placeholder="Referencia">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="apellido" placeholder="Apellido">
+                " type="text" name="Nombre" placeholder="Nombre">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="email" placeholder="Correo electrónico">
+                " type="text" name="Descripción" placeholder="Descripción">
+                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
+                " type="number" name="ValorUnitario" placeholder="Valor unitario">
             </form>
             <br>
             <div class="flex justify-end">
-                <button onclick="closeModal('createUserModal')"
+                <button onclick="closeModal('createProductsModal')"
                     class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110">Cancelar</button>
                 <button onclick="showAlert('crear')"
                     class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110">Crear</button>
@@ -164,25 +157,27 @@
     </div>
 
 
-    <div id="editUserModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
+    <div id="editProductsModal" class="fixed inset-0 flex items-center justify-center z-50 hidden ">
         <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
-            <button onclick="closeModal('editUserModal')"
+            <button onclick="closeModal('editProductsModal')"
                 class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
                 ×
             </button>
 
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Editar usuario</h2>
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Editar producto</h2>
             <form action="" class="mt-5 flex flex-col gap-4">
                 <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="nombre" placeholder="Nombre">
+                " type="text" name="Referencia" placeholder="Referencia" readonly>
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="apellido" placeholder="Apellido">
+                " type="text" name="Nombre" placeholder="Nombre">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="email" placeholder="Correo electrónico" readonly value="karengmg27@gmail.com">
+                " type="text" name="Descripción" placeholder="Descripción">
+                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
+                " type="number" name="ValorUnitario" placeholder="Valor Unitario">
             </form>
             <br>
             <div class="flex justify-end">
-                <button onclick="closeModal('editUserModal')"
+                <button onclick="closeModal('editProductsModal')"
                     class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110">Cancelar</button>
                 <button onclick="showAlert('editar')"
                     class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110">Actualizar</button>
