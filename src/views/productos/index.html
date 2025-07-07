@@ -202,17 +202,17 @@
             }
         })
 
-        const users = await data.json()
+        const products = await data.json()
         console.log(products)
         const tr = document.createElement('tr')
-        users.forEach(product => {
+        products.forEach(product => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
-                <td class="text-center">${products.productID}</td>
-                <td class="text-center">${products.product}</td>
-                <td class="text-center">${products.category}</td>
-                <td class="text-center">${products.price}</td>
-                <td class="text-center">${products.stock}</td>
+                <td class="text-center">${product.productID}</td>
+                <td class="text-center">${product.product}</td>
+                <td class="text-center">${product.category}</td>
+                <td class="text-center">${product.price}</td>
+                <td class="text-center">${product.stock}</td>
                 <td class="text-center">
                     <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
                 </td>
