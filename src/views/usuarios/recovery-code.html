@@ -14,26 +14,52 @@
             <h2 class="text-4xl text-amber-400 font-bold text-2x1">Recuperar contraseña</h2>
             <form method="post" class="mt-5 flex flex-col gap-4">
                 <p class=" text-gray-500">Revisa el codigo de verificacion que hemos enviado al correo: <strong id="correo"></strong></p>
-                <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
+                <input id="code" class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
                 " type="number" name="number" placeholder="Codigo">
                 
                 
                 <div class="flex justify-center gap-6 mt-5">
-                    <a href="login.html" class="mt-3 bg-orange-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Cancelar</a>
-                    <a href="new-password.html" class="mt-3 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Continuar</a>
+                    <a href="/" class="mt-3 bg-orange-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Cancelar</a>
+                    <button id="submit" type="button" class="mt-3 bg-amber-400 rounded-xl text-white py-2 font-bold text-xl hover:scale-110 duration-300 w-40 text-center">Continuar</button>
                 </div>
             </form>
     </section>
 
     <script>
         const $ = (el) => document.querySelector(el)
+        const submitButton = $('#submit')
+        const inputCode = $('#code')
+        const userEmail = localStorage.getItem("userEmail")
 
         document.addEventListener('DOMContentLoaded', () => {
-            const userEmail = localStorage.getItem("userEmail")
+
             if (userEmail) {
                 $('#correo').textContent = userEmail
             } else {
                 $('#correo').textContent = "No se ha proporcionado un correo electrónico."
+            }
+
+        })
+
+        submitButton.addEventListener('click', async (e) => {
+            e.preventDefault()
+
+            const response = await fetch('/api/recovery/recovery-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    code: parseInt(inputCode.value),
+                    email: userEmail
+                })
+            })
+
+            const data = await response.json()
+            if (response.ok) {
+                window.location.href = '/new-password'
+            } else {
+                alert(data.error || "Error al verificar el código.")
             }
         })
 

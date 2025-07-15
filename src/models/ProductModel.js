@@ -1,19 +1,17 @@
 import db from './DATABASE.js'
 
 export default class UserModel {
-    constructor() {}
-
-    async getAll() {
+    static async getAll() {
         const [rows] = await db.query("SELECT BIN_TO_UUID(productID) productID, product, category, price, stock FROM products;")
         return rows
     }
 
-    async getById(productID) {
+    static async getById(productID) {
         const [rows] = await db.query("SELECT BIN_TO_UUID(productID) productID, product, category, price, stock FROM products WHERE productID = UUID_TO_BIN(?);", [productID])
         return rows[0]
     }
 
-    async create(input) {
+    static async create(input) {
         const { product, category, price, stock } = input
         if (!product || !category || !price || !stock) throw new Error("Todos los campos son obligatorios")
         const [existingProduct] = await db.query("SELECT * FROM products WHERE product = ?;", [product])
@@ -31,12 +29,12 @@ export default class UserModel {
         }
     }
 
-    async detele(productID) {
+    static async detele(productID) {
         await db.query("Update products SET disabled = 1 WHERE productID = UUID_TO_BIN(?);", [productID])
         return { message: "Producto eliminado correctamente" }
     }
 
-    async update(productID, input) {
+    static async update(productID, input) {
         const { product, category, price, stock } = input
         if (!product || !category || !price || !stock) throw new Error("Todos los campos son obligatorios")
 

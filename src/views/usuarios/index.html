@@ -1,254 +1,417 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="bg-stone-100">
-
-    <section class="flex min-h-screen">
-
-        <div class="bg-gray-200 w-[200px] rounded-xl shadow-lg flex flex-col justify-between items-center py-6">
-
-            <div class="flex flex-col gap-6 items-center">
-                <h2 class="text-3xl text-amber-400 font-bold">Menú</h2>
-
-                <a href="#top" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-                    </svg>
-                </a>
-
-                <a href="/productos/panel" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M4 11.319c0 3.102 .444 5.319 2.222 7.978c1.351 1.797 3.156 2.247 5.08 .988c.426 -.268 .97 -.268 1.397 0c1.923 1.26 3.728 .809 5.079 -.988c1.778 -2.66 2.222 -4.876 2.222 -7.977c0 -2.661 -1.99 -5.32 -4.444 -5.32c-1.267 0 -2.41 .693 -3.22 1.44a.5 .5 0 0 1 -.672 0c-.809 -.746 -1.953 -1.44 -3.22 -1.44c-2.454 0 -4.444 2.66 -4.444 5.319" />
-                        <path d="M7 12c0 -1.47 .454 -2.34 1.5 -3" />
-                        <path d="M12 7c0 -1.2 .867 -4 3 -4" />
-                    </svg>
-                </a>
-            </div>
-
-            <div class="mb-4">
-                <a href="/" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M7 6a7.75 7.75 0 1 0 10 0" />
-                        <path d="M12 4l0 8" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        </div>
-
-        <div class="bg-stone-100 flex-1">
-
-            <div class="px-10 py-6">
-                <h2 class="text-3xl text-amber-400 font-bold mb-6">Usuarios</h2>
-
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-10">
-                        <input id="Buscar" class="p-2  rounded-xl bg-gray-100 border w-250" type="text"
-                            placeholder="Buscar">
-                    </div>
-
-                    <div class="col-span-2 flex-row">
-                        <button onclick="openModal('createUserModal')"
-                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+
-                            Nuevo
-                            usuario</button>
-                    </div>
-                </div>
-
-
-                <table class="table w-full mt-16 rounded-full">
-                    <thead>
-                        <tr class="bg-amber-100 ">
-                            <th class="px-4 py-2 font-semibold">Id</th>
-                            <th class="px-4 py-2 font-semibold">Nombre</th>
-                            <th class="px-4 py-2 font-semibold">Apellido</th>
-                            <th class="px-4 py-2 font-semibold">Correo Electrónico</th>
-                            <th class="px-4 py-2 font-semibold">Estado</th>
-                            <th class="px-4 py-2 font-semibold">
-
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="userTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-    </section>
-
-    <div id="createUserModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
-        <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
-            <button onclick="closeModal('createUserModal')"
-                class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
-                ×
+<body class="bg-stone-100 flex min-h-dvh w-screen">
+    <aside class="bg-gray-200 min-w-20 md:min-w-40 shadow-black/65 shadow-md flex flex-col justify-between items-center p-2">
+        <div class="flex flex-col gap-2">
+            <button class="self-end hover:text-amber-400 hover:bg-zinc-50/55 active:bg-zinc-50 font-semibold p-2 rounded-lg cursor-pointer transition-[color:.3s]">
+                <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                    <path d="M15 4v16" />
+                    <path d="M9 10l2 2l-2 2" />
+                </svg>
+                <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                    <path d="M15 4v16" />
+                    <path d="M10 10l-2 2l2 2" />
+                </svg>
             </button>
-
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Nuevo usuario</h2>
-            <form action="" class="mt-5 flex flex-col gap-4">
-                <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="nombre" placeholder="Nombre">
-                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="apellido" placeholder="Apellido">
-                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="email" placeholder="Correo electrónico">
-            </form>
-            <br>
-            <div class="flex justify-end">
-                <button onclick="closeModal('createUserModal')"
-                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110">Cancelar</button>
-                <button onclick="showAlert('crear')"
-                    class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110">Crear</button>
-            </div>
+            <a href="#top" class="flex gap-2 hover:text-amber-400 hover:bg-zinc-50/55 active:bg-zinc-50 font-semibold p-2 rounded-lg cursor-pointer transition-[color:.3s]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                    stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                </svg>
+                <span class="hidden md:block">Usuarios</span>
+            </a>
+            <a href="/productos/panel" class="flex gap-2 hover:text-amber-400 hover:bg-zinc-50/55 active:bg-zinc-50 font-semibold p-2 rounded-lg cursor-pointer transition-[color:.3s]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 11.319c0 3.102 .444 5.319 2.222 7.978c1.351 1.797 3.156 2.247 5.08 .988c.426 -.268 .97 -.268 1.397 0c1.923 1.26 3.728 .809 5.079 -.988c1.778 -2.66 2.222 -4.876 2.222 -7.977c0 -2.661 -1.99 -5.32 -4.444 -5.32c-1.267 0 -2.41 .693 -3.22 1.44a.5 .5 0 0 1 -.672 0c-.809 -.746 -1.953 -1.44 -3.22 -1.44c-2.454 0 -4.444 2.66 -4.444 5.319" />
+                    <path d="M7 12c0 -1.47 .454 -2.34 1.5 -3" />
+                    <path d="M12 7c0 -1.2 .867 -4 3 -4" />
+                </svg>
+                <span class="hidden md:block">Productos</span>
+            </a>
         </div>
-    </div>
-
-
-    <div id="editUserModal" class="fixed inset-0 items-center justify-center z-50 hidden ">
-        <div class="bg-white w-3/5 h-3/5 mb-40 rounded-lg shadow-lg p-6 relative">
-            <button onclick="closeModal('editUserModal')"
-                class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">
-                ×
+        <div>
+            <button id="logout" onclick="SignOut()" class="flex gap-2 hover:text-red-600 hover:bg-zinc-50/55 active:bg-zinc-50 font-semibold p-2 rounded-lg cursor-pointer transition-[color:.3s]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M7 6a7.75 7.75 0 1 0 10 0" />
+                    <path d="M12 4l0 8" />
+                </svg>
+                <span class="hidden md:block" >Cerrar sesión</span>
             </button>
-
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Editar usuario</h2>
-            <form action="" class="mt-5 flex flex-col gap-4">
-                <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="nombre" placeholder="Nombre">
-                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="apellido" placeholder="Apellido">
-                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="email" placeholder="Correo electrónico" readonly value="karengmg27@gmail.com">
-            </form>
-            <br>
-            <div class="flex justify-end">
-                <button onclick="closeModal('editUserModal')"
-                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110">Cancelar</button>
-                <button onclick="showAlert('editar')"
-                    class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110">Actualizar</button>
+        </div>
+    </aside>
+    <main class="flex flex-col p-4 w-full h-screen overflow-hidden">
+        <h2 class="text-3xl text-amber-400 font-bold mb-6">Usuarios</h2>
+        <div class="flex gap-4">
+            <input id="Buscar" class="p-2 rounded-xl bg-gray-100 border w-full" type="text" placeholder="Buscar">
+            <button onclick="openModal($('#createUserModal'))" class="min-w-fit bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110 transition-[scale:.3s]">+ Nuevo usuario</button>
+        </div>
+        <div class="mt-8 w-full max-h-[70vh] overflow-auto rounded-xl shadow-amber-200 shadow-sm" style="overflow: overlay;">
+            <table class="w-full border-collapse text-left">
+                <thead class="bg-amber-100 sticky top-0 left-0 capitalize">
+                    <tr>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100">Id</th>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100">Nombre</th>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100">Apellido</th>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100">Correo</th>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100">Estado</th>
+                        <th class="p-2 font-semibold text-left sticky top-0 left-0 bg-amber-100"></th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+        <div id="createUserModal" class="fixed inset-0 items-center justify-center z-40 bg-black/50 hidden">
+            <div id="userModal" class="bg-white min-w-3/5 min-h-3/5 rounded-lg shadow-lg p-6 relative">
+                <button onclick="closeModal($('#createUserModal'))" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer">×</button>
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Nuevo usuario</h2>
+                <form id="createUserForm" method="post" class="mt-5 flex flex-col gap-4">
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="text" name="name" placeholder="Nombre" required>
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="text" name="last_name" placeholder="Apellido">
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="email" name="email" placeholder="Correo electrónico" required>
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="password" name="password" placeholder="Contraseña" required>
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="password" name="confirmPassword" placeholder="Confirmar contraseña" required>
+                    <div class="flex justify-end">
+                        <button onclick="closeModal($('#createUserModal'))" type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110 transition-transform">Cancelar</button>
+                        <button type="submit" class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110 transition-transform">Crear</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+        <div id="editUserModal" class="fixed inset-0 items-center justify-center z-50 bg-black/50 hidden ">
+            <div class="bg-white w-3/5 h-3/5 rounded-lg shadow-lg p-6 relative">
+                <button onclick="closeModal($('#editUserModal'))" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl font-bold cursor-pointer w-6 h-6 flex items-center justify-center">×</button>
+                <button class="absolute h-6 top-2 right-10 cursor-pointer inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset active-btn">Habilitar usuario</button>
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Editar usuario</h2>
+                <form id="editUserForm" method="post" class="mt-5 flex flex-col gap-4">
+                    <input class="hidden" name="userID" type="text" disabled value="">
+                    <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200" type="text" name="name" placeholder="Nombre">
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="text" name="last_name" placeholder="Apellido">
+                    <input class="p-2 rounded-xl bg-gray-100 border border-amber-200" type="text" name="email" placeholder="Correo electrónico">
+                    <div class="flex justify-end">
+                        <button onclick="closeModal($('#editUserModal'))" type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400 mr-2 cursor-pointer hover:scale-110">Cancelar</button>
+                        <button type="submit" class="bg-amber-400 text-white px-4 py-2 rounded-xl hover:bg-amber-500 cursor-pointer hover:scale-110">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <template id="user-row-template">
+            <tr data-user-id="">
+                <td class="p-2 user-id"></td>
+                <td class="p-2 user-name"></td>
+                <td class="p-2 user-lastname"></td>
+                <td class="p-2 user-email"></td>
+                <td class="p-2 user-status"></td>
+                <td class="text-center overflow-visible">
+                    <div class="actions inline-block text-left">
+                        <button onclick="toggleDropdown(this)" class="inline-flex items-center cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none" type="button">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu absolute right-2 mt-2 bg-white rounded-lg shadow-lg z-10 hidden">
+                            <button class="edit-btn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</button>
+                            <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 disable-btn">Inhabilitar</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </template>
 
-</body>
+    </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    const $ = (el) => document.querySelector(el)
-    async function cargarUsuarios() {
+    <script>
+        const $ = (el) => document.querySelector(el)
+        const $createUserForm = $('#createUserForm')
+        const $editUserForm = $('#editUserForm')
         const userTableBody = $('#userTableBody')
-        const data = await fetch('/api/users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
+        const url = '/api/users/'
+    
+        const on = (el, event, callback) => {
+            if (el) {
+                el.addEventListener(event, callback)
+            }
+        }
+
+        on($('.active-btn'), 'click', async (e) => {
+            const modal = $('#editUserModal')
+            const { userID, name, last_name, email } = getUserFormValues(modal)
+            enableUser(userID.value)
+        })
+
+        on(userTableBody, 'click', (e) => {
+            const btn = e.target.closest('.edit-btn')
+            if (btn) {
+                const userID = btn.closest('tr').dataset.userId
+                loadUser(userID, $('#editUserModal'))
             }
         })
 
-        const users = await data.json()
-        console.log(users)
-        const tr = document.createElement('tr')
-        users.forEach(user => {
-            const tr = document.createElement('tr')
-            tr.innerHTML = `
-                <td class="text-center">${user.userID}</td>
-                <td class="text-center">${user.name}</td>
-                <td class="text-center">${user.last_name}</td>
-                <td class="text-center">${user.email}</td>
-                <td class="text-center">
-                    <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
-                </td>
-                <td class="text-center relative overflow-visible">
-                    <div class="relative inline-block text-left">
-                        <button onclick="toggleDropdown(this)"
-                            class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
-                            type="button">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                            </svg>
-                        </button>
-                        <div
-                            class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
-                            <a href="#" onclick="openModal('editUserModal')"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
-                        </div>
-                    </div>
-                </td>`
-            userTableBody.appendChild(tr)
+        on(userTableBody, 'click', (e) => {
+            const btn = e.target.closest('.disable-btn')
+            if (btn) {
+                const userID = btn.closest('tr').dataset.userId
+                disableUser(userID)
+            }
         })
-    }
 
-    function showAlert(type) {
+        on(document, 'DOMContentLoaded', async () => {
+            const res = await fetch(url)
+            const users = await res.json()
+            userTableBody.innerHTML = ''
+            users.forEach(user => {
+                const row = renderUserRow(user)
+                userTableBody.appendChild(row)
+            })
+        })
 
-        if (type === "crear") {
-            Swal.fire({
-                title: 'Genial!',
-                text: 'El usuario ha sido creado exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
+        function toggleDropdown(button) {
+            const menu = button.nextElementSibling
+
+            document.querySelectorAll('.dropdown-menu').forEach(el => {
+                if (el !== menu) el.classList.add('hidden')
+            })
+
+            menu.classList.toggle('hidden')
+            menu.classList.toggle('flex')
+
+            const closeOnClickOutside = (event) => {
+                if (!button.parentElement.contains(event.target)) {
+                    menu.classList.add('hidden')
+                    menu.classList.remove('flex')
+                    document.removeEventListener('click', closeOnClickOutside)
+                }
+            }
+
+            setTimeout(() => {
+                document.addEventListener('click', closeOnClickOutside)
+            }, 0)
+        }
+
+        async function loadUser(userID, modal) {
+            const [userIdInput, userNameInput, userLastNameInput, userEmailInput] = [
+                modal.querySelector('[name="userID"]'),
+                modal.querySelector('[name="name"]'),
+                modal.querySelector('[name="last_name"]'),
+                modal.querySelector('[name="email"]')
+            ]
+            
+            try {
+                const response = await fetch(url + userID)
+                if (!response.ok) throw new Error('Error en la respuesta del servidor')
+
+                const data = await response.json()
+                
+                userIdInput.value = data.userID
+                userNameInput.value = data.name
+                userLastNameInput.value = data.last_name
+                userEmailInput.value = data.email
+    
+                openModal(modal)
+            } catch (error) {
+                showAlert('error', 'Error al cargar o mostrar el usuario')
+                console.error(error)
+            }
+        }
+
+        function openModal(modal) {
+            modal.classList.add('flex')
+            modal.classList.remove('hidden')
+            const handleOutsideClick = (e) => {
+                if (e.target === modal) {
+                    closeModal(modal)
+                    modal.removeEventListener('click', handleOutsideClick)
+                }
+            }
+            modal.addEventListener('click', handleOutsideClick)
+
+            on(document, 'keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal(modal)
+                }
             })
         }
-        else {
-            Swal.fire({
-                title: 'Genial!',
-                text: 'El usuario ha sido editado exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
+
+        function closeModal(modal) {
+            const form = modal.querySelector('form')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+            if (form) form.reset()
+        }
+    
+        $createUserForm.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const formData = new FormData($createUserForm)
+            const password = formData.get('password')
+            const confirmPassword = formData.get('confirmPassword')
+            const body = {
+                name: formData.get('name'),
+                last_name: formData.get('last_name'),
+                email: formData.get('email'),
+                password: password
+            }
+            if (password !== confirmPassword) return showAlert('error', 'las contraseñas no coinciden')
+            const response = await fetch(url, {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(body)
             })
+            if (response.ok) {
+                const newUser = await response.json()
+                const newRow = renderUserRow({ userID: newUser.userID, name: body.name, last_name: body.last_name, email: body.email, disabled: 1 })
+                userTableBody.appendChild(newRow)
+                closeModal($('#createUserModal'))
+            } else {
+                showAlert('error', 'Error al crear el usuario!')
+            }
+        })
+
+        $editUserForm.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const modal = $('#editUserModal')
+            const { userID, name, last_name, email } = getUserFormValues(modal)
+
+            const row = $(`[data-user-id="${userID.value}"]`)
+            const body = {
+                name: name.value,
+                last_name: last_name.value,
+                email: email.value
+            }
+            
+            try {
+                const response = await fetch(url + userID.value, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                })
+
+                if (!response.ok) throw new Error('Error en la respuesta del servidor')
+
+                showAlert('good', 'Usuario editado')
+                
+                const newRow = renderUserRow({ userID: userID.value, ...body })
+                row.replaceWith(newRow)
+
+                closeModal(modal)
+            } catch (error) {
+                showAlert('error', 'Error al editar el usuario')
+                console.error(error)
+            }
+        })
+
+        async function disableUser(userID) {
+            const row = $(`[data-user-id="${userID}"]`)
+            const userStatus = row.querySelector('.user-status')
+            const body = { disabled: 1 }
+
+            try {
+                const response = await fetch(url + userID, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                })
+
+                if (!response.ok) throw new Error('Error en la respuesta del servidor')
+                userStatus.innerHTML = '<span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span>'
+                showAlert('good', 'Usuario inhabilitado')
+            } catch (error) {
+                showAlert('error', 'Error al editar el usuario')
+                console.error(error)
+            }
         }
-    }
 
-    function toggleDropdown(button) {
-        const menu = button.nextElementSibling;
-        const isHidden = menu.classList.contains('hidden');
-        document.querySelectorAll('.dropdown-menu').forEach(el => el.classList.add('hidden'));
-        if (isHidden) {
-            menu.classList.remove('hidden');
-        } else {
-            menu.classList.add('hidden');
+        async function enableUser(userID) {
+            const row = $(`[data-user-id="${userID}"]`)
+            const userStatus = row.querySelector('.user-status')
+            const body = { disabled: 0 }
+
+            try {
+                const res = await fetch(url + userID, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                })
+
+                if (!res.ok) throw new Error('Error en la respuesta del servidor')
+                userStatus.innerHTML = '<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>'
+                showAlert('good', 'Usuario habilitado!')
+            } catch (error) {
+                showAlert('error', 'Error al habilitar el usuario')
+                console.error(error)
+            }
         }
-    }
 
-    document.addEventListener('click', function (event) {
-        const isDropdownButton = event.target.closest('button[onclick="toggleDropdown(this)"]');
-        if (!isDropdownButton) {
-            document.querySelectorAll('.dropdown-menu').forEach(el => el.classList.add('hidden'));
+        function showAlert(type, message) {
+            if (type === 'error') {
+                Swal.fire({
+                    title: 'Oops...',
+                    text: message,
+                    icon: 'error',
+                    cancelButtonText: 'ok'
+                })
+            } else if (type === 'good') {
+                Swal.fire({
+                    title: 'Genial!',
+                    text: message,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
+            }
         }
-    });
 
-    function openModal(element) {
-        document.getElementById(element).classList.remove("hidden");
-    }
+        function renderUserRow(user) {
+            const template = $('#user-row-template').content.cloneNode(true)
+            const tr = template.querySelector('tr')
+            tr.dataset.userId = user.userID
 
-    function closeModal(element) {
-        document.getElementById(element).classList.add("hidden");
-    }
+            tr.querySelector('.user-id').textContent = user.userID
+            tr.querySelector('.user-name').textContent = user.name
+            tr.querySelector('.user-lastname').textContent = user.last_name
+            tr.querySelector('.user-email').textContent = user.email
 
-    cargarUsuarios()
-</script>
+            tr.querySelector('.user-status').innerHTML = user.disabled == 1
+            ? '<span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span>'
+            : '<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>'
 
+            return tr
+        }
+
+        function getUserFormValues(modal) {
+            return {
+                userID: modal.querySelector('[name="userID"]'),
+                name: modal.querySelector('[name="name"]'),
+                last_name: modal.querySelector('[name="last_name"]'),
+                email: modal.querySelector('[name="email"]'),
+                disabled: modal.querySelector('[name="selectStatus"]')
+            }
+        }
+
+        async function SignOut() {
+            const url = '/api/auth/logout'
+            const response = await fetch(url, { method: 'post' })
+            if (response.ok) return window.location.href = '/'
+        }
+    </script>
+</body>
 </html>

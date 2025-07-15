@@ -1,13 +1,9 @@
 import UserModel from "../models/UserModel.js"
 
-const userModel = new UserModel()
-
 export default class UserController {
-    constructor() {}
-
-    async getAll(req, res) {
+    static async getAll(req, res) {
         try {
-            const users = await userModel.getAll()
+            const users = await UserModel.getAll()
             res.status(200).send(users)
         } catch (error) {
             console.error("Error al obtener usuarios:", error.message)
@@ -15,10 +11,10 @@ export default class UserController {
         }
     }
 
-    async getById(req, res) {
+    static async getById(req, res) {
         const { userID } = req.params
         try {
-            const user = await userModel.getById(userID)
+            const user = await UserModel.getById(userID)
             res.status(200).send(user)
         } catch(error) {
             console.error("Error al obtener usuario por ID:", error.message)
@@ -26,9 +22,9 @@ export default class UserController {
         }
     }
 
-    async create(req, res) {
+    static async create(req, res) {
         try {
-            const user = await userModel.create(req.body)
+            const user = await UserModel.create(req.body)
             res.status(201).send(user)
         } catch (error) {
             console.error("Error al crear usuario:", error.message)
@@ -36,10 +32,10 @@ export default class UserController {
         }
     }
 
-    async delete(req, res) {
+    static async delete(req, res) {
         const { userID } = req.params
         try {
-            const result = await userModel.detele(userID)
+            const result = await UserModel.detele(userID)
             res.status(200).send(result)
         } catch (error) {
             console.error("Error al eliminar usuario:", error.message)
@@ -47,24 +43,13 @@ export default class UserController {
         }
     }
 
-    async update(req, res) {
+    static async update(req, res) {
         const { userID } = req.params
         try {
-            const updatedUser = await userModel.update(userID, req.body)
-            res.status(200).send({ message: "Usuario actualizado correctamente", user: updatedUser })
+            await UserModel.update(userID, req.body)
+            res.status(200).send({ message: "Usuario actualizado correctamente"})
         } catch (error) {
-            console.error("Error al actualizar usuario:", error.message)
-            res.status(500).send({ message: "Internal server error" })
-        }
-    }
-
-    async emailCode(req, res) {
-        const { email } = req.body
-        try {
-            const code = await userModel.emailCode(email)
-            return res.status(200).send({ message: "Código de verificación enviado", code })
-        } catch (error) {
-            console.error("Error al enviar código de verificación:", error.message)
+            console.error("Error al actualizar usuario:", error)
             res.status(500).send({ message: "Internal server error" })
         }
     }

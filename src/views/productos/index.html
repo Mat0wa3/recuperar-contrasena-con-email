@@ -17,7 +17,7 @@
             <div class="flex flex-col gap-6 items-center">
                 <h2 class="text-3xl text-amber-400 font-bold">Menú</h2>
 
-                <a href="/usuarios/panel" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+                <a href="/usuarios/panel" class="hover:text-amber-400 p-2 rounded-full cursor-pointer hover:scale-120 transition-[scale:.3s]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -28,7 +28,7 @@
                     </svg>
                 </a>
 
-                <a href="#top" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+                <a href="#top" class="hover:text-amber-400 p-2 rounded-full dursor-pointer hover:scale-120 transition-[scale:.3s]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -40,18 +40,16 @@
                 </a>
             </div>
 
-            <div class="mb-4">
-                <a href="/" class="hover:text-amber-400 p-2 rounded-full transition-colors cursor-pointer hover:scale-110">
+            <div class="flex items-center mb-4">
+                <button id="logout" class="hover:text-red-500 p-2 rounded-full cursor-pointer hover:scale-120 transition-[scale:.3s]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M7 6a7.75 7.75 0 1 0 10 0" />
                         <path d="M12 4l0 8" />
                     </svg>
-                </a>
+                </button>
             </div>
-        </div>
-
         </div>
 
         <div class="bg-stone-100 flex-1">
@@ -61,12 +59,12 @@
 
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-10">
-                        <input class="p-2  rounded-xl bg-gray-100 border w-250" name="Buscar" placeholder="Buscar">
+                        <input class="p-2  rounded-xl bg-gray-100 border w-full" name="Buscar" placeholder="Buscar">
                     </div>
 
                     <div class="col-span-2 flex-row">
                         <button onclick="openModal('createProductsModal')"
-                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110">+
+                            class="bg-amber-400 font-bold text-white p-2 rounded-xl float-end cursor-pointer hover:scale-110 transition-[scale:.3s]">+
                             Nuevo producto</button>
                     </div>
                 </div>
@@ -94,10 +92,10 @@
                             <td class="text-center">Pastas</td>
                             <td class="text-center">Espaguettis doria</td>
                             <td class="text-center">$3.500</td>
-                            <td class="text-center"><span
-                                    class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                            <td class="text-center">
+                                <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                                <!-- <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span> -->
                             </td>
-                            <!-- <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">Inactivo</span> -->
                             <td class="text-center relative overflow-visible">
                                 <div class="relative inline-block text-left">
                                     <button onclick="toggleDropdown(this)"
@@ -190,6 +188,31 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    const $ = (el) => document.querySelector(el)
+
+    const $logout = $('#logout')
+
+    $logout.onclick = () => SignOut()
+
+    async function SignOut() {
+        try {
+            const response = await fetch('/api/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (response.ok) {
+                window.location.href = '/'
+            } else {
+                const data = await response.json()
+                alert(data.message || "Error al cerrar sesión.")
+            }
+        } catch (error) {
+            console.error("Error al cerrar sesión:", error)
+        }
+    }
 
     function showAlert(type) {
 

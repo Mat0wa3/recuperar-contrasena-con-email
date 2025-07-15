@@ -10,12 +10,19 @@
   "keywords": [],
   "author": "Hecho con 💖 y javascript",
   "license": "ISC",
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.13.1",
   "dependencies": {
     "bcrypt": "6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "16.5.0",
     "express": "5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "3.14.1",
     "resend": "^4.6.0"
+  },
+  "devDependencies": {
+    "chalk": "^5.4.1",
+    "morgan": "^1.10.0"
   }
 }

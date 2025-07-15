@@ -1,11 +1,11 @@
 export function generateVerificationCode() {
-    return Math.floor(100000 + Math.random() * 900000).toString()
+    return Math.floor(100000 + Math.random() * 900000)
 }
 
 import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendVerificationEmail(email, code) {
+export async function sendVerificationEmail(email, code, message) {
     const { data, error } = await resend.emails.send({
         from: 'Mateo <noreply@resend.dev>',
         to: [email],
@@ -13,7 +13,7 @@ export async function sendVerificationEmail(email, code) {
         html: `
             <h1>Verificación de cuenta</h1>
             <p>Tu código de verificación es: <strong>${code}</strong></p>
-            <p>Por favor, ingresa este código en la aplicación para completar el registro.</p>
+            <p>${message}</p>
         `
     })
 
