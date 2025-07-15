@@ -74,10 +74,10 @@
                     <thead>
                         <tr class="bg-amber-100 ">
                             <th class="px-4 py-2 font-semibold">Id</th>
-                            <th class="px-4 py-2 font-semibold">Referencia</th>
-                            <th class="px-4 py-2 font-semibold">Nombre</th>
-                            <th class="px-4 py-2 font-semibold">Descripción</th>
+                            <th class="px-4 py-2 font-semibold">Producto</th>
+                            <th class="px-4 py-2 font-semibold">Categoría</th>
                             <th class="px-4 py-2 font-semibold">Valor unitario</th>
+                            <th class="px-4 py-2 font-semibold">Stock</th>
                             <th class="px-4 py-2 font-semibold">Estado</th>
                             <th class="px-4 py-2 font-semibold">
 
@@ -85,12 +85,11 @@
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="productTableBody">
                         <tr>
                             <td class="text-center">1</td>
                             <td class="text-center">P01</td>
                             <td class="text-center">Pastas</td>
-                            <td class="text-center">Espaguettis doria</td>
                             <td class="text-center">$3.500</td>
                             <td class="text-center">
                                 <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
@@ -134,13 +133,14 @@
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Nuevo producto</h2>
             <form action="" class="mt-5 flex flex-col gap-4">
                 <input class="p-2 mt-8 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="Referencia" placeholder="Referencia">
+                " type="text" name="Producto" placeholder="Producto">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="Nombre" placeholder="Nombre">
-                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
-                " type="text" name="Descripción" placeholder="Descripción">
+                " type="text" name="categoria" placeholder="Categoría">
                 <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
                 " type="number" name="ValorUnitario" placeholder="Valor unitario">
+                <input class="p-2 rounded-xl bg-gray-100 border border-amber-200
+                " type="number" name="stock" placeholder="Stock">
+                
             </form>
             <br>
             <div class="flex justify-end">
@@ -214,12 +214,60 @@
         }
     }
 
+    const $ = (el) => document.querySelector(el)
+    async function cargarProducto() {
+        const productTableBody = $('#productTableBody')
+        const data = await fetch('/api/products', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const products = await data.json()
+        console.log(products)
+        const tr = document.createElement('tr')
+        products.forEach(product => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td class="text-center">${product.productID}</td>
+                <td class="text-center">${product.product}</td>
+                <td class="text-center">${product.category}</td>
+                <td class="text-center">${product.price}</td>
+                <td class="text-center">${product.stock}</td>
+                <td class="text-center">
+                    <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Activo</span>
+                </td>
+                <td class="text-center relative overflow-visible">
+                    <div class="relative inline-block text-left">
+                        <button onclick="toggleDropdown(this)"
+                            class="inline-flex items-center text-sm font-medium cursor-pointer hover:bg-amber-400 p-1.5 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none"
+                            type="button">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 hidden">
+                            <a href="#" onclick="openModal('editProductModal')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inhabilitar</a>
+                        </div>
+                    </div>
+                </td>`
+            productTableBody.appendChild(tr)
+        })
+    }
+
     function showAlert(type) {
 
         if (type === "crear") {
             Swal.fire({
                 title: 'Genial!',
-                text: 'El usuario ha sido creado exitosamente.',
+                text: 'El producto ha sido creado exitosamente.',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             })
@@ -227,7 +275,7 @@
         else {
             Swal.fire({
                 title: 'Genial!',
-                text: 'El usuario ha sido editado exitosamente.',
+                text: 'El producto ha sido editado exitosamente.',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             })
